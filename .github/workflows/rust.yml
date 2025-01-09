@@ -10,30 +10,39 @@ env:
   CARGO_TERM_COLOR: "always"
 
 jobs:
-  build:
+  build-and-publish:
 
     runs-on: "ubuntu-latest"
 
     steps:
       - uses: "actions/checkout@v4"
+
       - name: "Build"
         run: "cargo build --release --verbose"
+
       - name: "Run tests"
         run: "cargo test --verbose"
+
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          automatic_release_tag: "latest"
+          files: "target/release/github-actions-test"
+          prerelease: false
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
       
-  publish:
+  # publish:
 
-      needs: "build"
+  #     needs: "build"
 
-      permissions:
-        contents: "write"
+  #     permissions:
+  #       contents: "write"
 
-      runs-on: "ubuntu-latest"
+  #     runs-on: "ubuntu-latest"
 
-      steps:
-        - uses: "marvinpinto/action-automatic-releases@v1.2.1"
-          with:
-            automatic_release_tag: "latest"
-            files: "target/release/github-actions-test"
-            prerelease: false
-            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+  #     steps:
+  #       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+  #         with:
+  #           automatic_release_tag: "latest"
+  #           files: "target/release/github-actions-test"
+  #           prerelease: false
+  #           repo_token: "${{ secrets.GITHUB_TOKEN }}"
