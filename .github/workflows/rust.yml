@@ -30,6 +30,6 @@ jobs:
       steps:
         - uses: "marvinpinto/action-automatic-releases@latest"
           with:
-            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            files: "target/release/github-actions-test"
             prerelease: false
-            files: target/release/github-actions-test
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
