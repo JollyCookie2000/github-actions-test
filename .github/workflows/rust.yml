@@ -12,6 +12,9 @@ env:
 jobs:
   build-and-publish:
 
+    permissions:
+      contents: "write"
+
     runs-on: "ubuntu-latest"
 
     steps:
